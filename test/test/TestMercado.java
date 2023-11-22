@@ -176,6 +176,19 @@ public class TestMercado {
 		mercado.realizarCompra(compra);
 	}
 	
+	@Test (expected = NoSePudoRealizarLaTransaccionException.class)
+	public void queSeLanceUnaExcepcionSiElSaldoDeLaCuentaEsInsuficienteParaHacerUnaTransferencia() throws NoSePudoRealizarLaTransaccionException{
+		MercadoUnlam mercado = new MercadoUnlam();
+		Transferible cuenta = new CuentaBancaria(2323, 5000.00);
+		Transferible cuenta2 = new CuentaBancaria(5341, 15000.00);
+		
+		Transferencia transferencia = new Transferencia(456, cuenta, cuenta2, 30000.00);
+		
+		mercado.realizarTransaccion(transferencia);
+		
+		assertTrue(mercado.getTransacciones().contains(transferencia));
+	}
+	
 	@Test
 	public void queDesdeUnaCuentaCorrienteSePuedaRealizarUnaTransferenciaPorEncimaDeSuSaldo() throws NoSePudoRealizarLaTransaccionException{
 		MercadoUnlam mercado = new MercadoUnlam();
@@ -187,9 +200,6 @@ public class TestMercado {
 		mercado.realizarTransaccion(transferencia);
 		
 		assertTrue(mercado.getTransacciones().contains(transferencia));
-	}
-
-	
-	
+	}	
 	
 }
