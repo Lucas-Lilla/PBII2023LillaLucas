@@ -2,27 +2,22 @@ package src;
 
 public class CuentaCorriente extends CuentaBancaria {
 
-	public CuentaCorriente(Integer numero) {
-		super(numero);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public Double getSaldo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void depositar(Double importe) {
-		// TODO Auto-generated method stub
-
+	private Double sobregiro;
+	
+	public CuentaCorriente(Integer numero, Double saldo, Double sobregiro) {
+		super(numero, saldo);
+		this.sobregiro = sobregiro;
 	}
 
 	@Override
 	public Boolean estraer(Double importe) {
-		// TODO Auto-generated method stub
-		return null;
+		if(super.getSaldo() >= importe) {
+			return true;
+		}else if(this.sobregiro >= importe) {
+			return true;
+		}else return false;
+			
 	}
+	
 
 }

@@ -1,6 +1,6 @@
 package src;
 
-public class PersonaJuridica extends Persona implements Comparable<PersonaJuridica>{
+public class PersonaJuridica extends Persona {
 
 	private Integer cuit;
 	
@@ -18,8 +18,10 @@ public class PersonaJuridica extends Persona implements Comparable<PersonaJuridi
 	}
 
 	@Override
-	public int compareTo(PersonaJuridica o) {
-		return this.cuit.compareTo(o.cuit);
+	public Integer getID() {
+		return this.cuit;
 	}
+
+
 
 }

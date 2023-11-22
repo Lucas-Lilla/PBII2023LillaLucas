@@ -1,27 +1,38 @@
 package src;
 
-public class CuentaBancaria extends MedioDePago implements Transferible{
+public class CuentaBancaria implements Transferible{
 
-	public CuentaBancaria(Integer numero) {
-		super(numero);
+	private Integer numero;
+	private Double saldo;
+	
+	public CuentaBancaria(Integer numero, Double saldo) {
+		this.numero = numero;
+		this.saldo = saldo;
+	}
+	
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 
 	@Override
 	public Double getSaldo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.saldo;
 	}
 
 	@Override
 	public void depositar(Double importe) {
-		// TODO Auto-generated method stub
-		
+		this.saldo = saldo + importe;
 	}
 
 	@Override
 	public Boolean estraer(Double importe) {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.saldo >= importe) {
+			return true;
+		}else return false;
 	}
 
 	

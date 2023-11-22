@@ -1,12 +1,20 @@
 package src;
 
-public class TarjetaDeCredito extends MedioDePago implements Pagadora{
+public class TarjetaDeCredito implements Pagadora{
 
+	private Integer numero;
 	private Double limite;
 	
 	public TarjetaDeCredito(Integer numero, Double limite) {
-		super(numero);
 		this.limite = limite;
+	}
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 
 	public Double getLimite() {
@@ -18,9 +26,10 @@ public class TarjetaDeCredito extends MedioDePago implements Pagadora{
 	}
 
 	@Override
-	public Boolean pagar(Persona vendedor, Double importe) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean pagar(Persona vendedor, Double importe) throws ExcedeLimiteDeCompraException {
+		if(importe <= this.limite) {
+			return true;
+		}else throw new ExcedeLimiteDeCompraException();
 	}
 	
 	

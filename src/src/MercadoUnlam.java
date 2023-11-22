@@ -33,6 +33,26 @@ public class MercadoUnlam {
 	public void agregarPersona(Persona persona) {
 		personas.add(persona);
 	}
+
+	public void agregarMedioDePago(Persona persona, Pagadora medio) {
+		persona.getMediosAsociados().add(medio);
+	}
+
+	
+	public void realizarCompra(Compra compra) throws SaldoInsuficienteException, ExcedeLimiteDeCompraException {
+		
+		if(compra.getMedio().pagar(compra.getPersonaDestino(), compra.getMonto())){
+			transacciones.add(compra);
+		}
+	}
+
+	public void realizarTransaccion(Transferencia transferencia) throws NoSePudoRealizarLaTransaccionException {
+		if(transferencia.getOrigen().estraer(transferencia.getMonto())) {
+			transferencia.getDestino().depositar(transferencia.getMonto());
+			transacciones.add(transferencia);
+		}else throw new NoSePudoRealizarLaTransaccionException();
+	}
+
 	
 	
 	
